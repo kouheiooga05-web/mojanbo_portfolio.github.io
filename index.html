@@ -19,10 +19,68 @@
         .skills-table th, .skills-table td { border: 1px solid #ddd; padding: 12px; text-align: left; }
         .skills-table th { background-color: #eee; }
 
-        .works-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-        .work-item { text-align: center; text-decoration: none; color: inherit; transition: transform 0.3s; }
-        .work-item:hover { transform: translateY(-5px); }
-        .work-item img { width: 100%; border-radius: 8px; }
+        .works-grid { 
+        display: grid; 
+        /* 1行に最大3つ並ぶように設定 */
+        grid-template-columns: repeat(3, 1fr); 
+        gap: 20px; 
+        }
+
+    /* レスポンシブ対応：画面が狭いときは2列、もっと狭いときは1列にする */
+        @media (max-width: 768px) {
+            .works-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 480px) {
+            .works-grid { grid-template-columns: 1fr; }
+        }
+
+        .work-item .card {
+            background: white;
+            padding: 0; /* 画像を端まで広げるため */
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            /* 正方形を維持する魔法のプロパティ */
+            aspect-ratio: 1 / 1; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .work-item img {
+            width: 100%;
+            height: 65%; /* 上部65%を画像に */
+            object-fit: cover; /* 画像の比率を保ったまま切り抜く */
+            border-radius: 0;
+        }
+
+        .work-info {
+            padding: 10px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .work-info h3 { margin: 0; font-size: 1.1rem; }
+        .work-info p { margin: 5px 0 0; font-size: 0.9rem; color: #666; }
+
+        /* 「もっと見る」ボタンのスタイル */
+        .more-button-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .btn-more {
+            display: inline-block;
+            padding: 10px 30px;
+            background-color: #1a2a6c;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: background 0.3s;
+        }
+        .btn-more:hover {
+            background-color: #b21f1f;
+        }
         
         footer { background: #333; color: white; text-align: center; padding: 40px 20px; }
         footer a { color: #fdbb2d; text-decoration: none; }
@@ -39,7 +97,8 @@
         <section id="about">
             <h2>About</h2>
             <div class="card">
-                <p><strong>プロフィール:</strong> 沼津高専生</p>
+                <p><strong>プロフィール:</strong> 沼津高専制御情報工学科</p>
+                <p><strong>趣味:</strong> ドラム、ベース等楽器の演奏</p>
                 <p><strong>ソフトウェア:</strong> Unity（C#）を用いたゲーム開発</p>
             </div>
         </section>
@@ -60,18 +119,32 @@
                 <a href="gamedetail.html" class="work-item">
                     <div class="card">
                         <img src="assets/kusakun.png" alt="ブロック崩し">
-                        <h3>ブロック崩し</h3>
-                        <p>初Unity</p>
+                        <div class="work-info">
+                            <h3>ブロック崩し</h3>
+                            <p>初Unity制作</p>
+                        </div>
                     </div>
                 </a>
+
+                <div class="work-item">
+                    <div class="card" style="background: #eee; justify-content: center; align-items: center;">
+                        <p>Coming Soon...</p>
+                    </div>
                 </div>
+
+                <div class="work-item">
+                    <div class="card" style="background: #eee; justify-content: center; align-items: center;">
+                        <p>Coming Soon...</p>
+                    </div>
+                </div>
+            </div>
         </section>
     </div>
 
     <footer>
         <h2>Contact</h2>
         <p>GitHub: <a href="https://github.com/kouheiooga05-web" target="_blank">kouheiooga05-web</a></p>
-        <p>Mail: <a href="mailto:info.com">メールは未実装です</a></p>
+        <p>Mail: <a href="mail:info.com">メールは未実装です</a></p>
         <p>&copy; 2026 Kohei All Rights Reserved.</p>
     </footer>
 
